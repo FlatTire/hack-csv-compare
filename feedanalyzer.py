@@ -168,21 +168,31 @@ class FeedAnalyzer(object):
         """
         column_changes = []
         for key, value in data_right.items():
-            break
+            # key = hash
+            # value = DataRow child class instance
             if key not in data_left:
+                # Was an addition/deletion based on the hash, do not check
                 continue
 
             if value != data_left[key]:
                 # Not equal, *some* differences
                 logging.debug("Column difference at '{k}'".format(k=key))
-                attr_list = data_left[key].find_different_columns(
-                    data_right[key])
 
-                for attr in attr_list:
-                    logging.warning("{k}: '{l}' -> '{r}'".format(
-                        k=attr,
-                        l=getattr(data_left[key], attr),
-                        r=getattr(data_right[key], attr)))
+                for column_index in \
+                        data_left[key].diff_columns(data_right[key]):
+                    column_name = data_left[key].headers[column_index]
+
+                    logging.warning("{k} [{h}]: '{l}' -> '{r}'".format(
+                        k=key,
+                        h=column_name,
+                        l=data_left[key].values[column_index],
+                        r=data_right[key].values[column_index]))
+
+                    column_changes.append(ColumnChange(
+                        column_name,
+                        data_left[key],
+                        data_right[key]
+                    ))
 
         return column_changes
 
