@@ -120,6 +120,14 @@ class Addition(DataChange):
     def hash(self):
         return self.new_row.hash
 
+    @property
+    def headers(self):
+        return self.new_row.headers
+
+    @property
+    def values(self):
+        return self.new_row.values
+
 
 class Deletion(DataChange):
     def __init__(self, old_row):
@@ -140,12 +148,20 @@ class ColumnChange(DataChange):
     def hash(self):
         return self.left.hash
 
+    @property
+    def left_field(self):
+        return getattr(self.left, self.field_name)
+
+    @property
+    def right_field(self):
+        return getattr(self.right, self.field_name)
+
     def __repr__(self):
         return "'{hash}' [{field}]: '{left}' -> '{right}'".format(
             hash=self.hash,
             field=self.field_name,
-            left=getattr(self.left, self.field_name),
-            right=getattr(self.right, self.field_name)
+            left=self.left_field,
+            right=self.right_field
         )
 
 
