@@ -281,3 +281,5 @@ class FeedAnalyzer(object):
 
         # 5. Find column-level changes related to individual column analysis
         changes += self._find_col_changes(data_left, data_right)
+
+        return changes
