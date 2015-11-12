@@ -29,7 +29,7 @@ class DataRow(object):
         return self.values == other.values
 
     def __getattr__(self, item):
-        field_index = self.headers[item]
+        field_index = self.headers.index(item)
         return self.values[field_index]
 
     @property
@@ -39,10 +39,10 @@ class DataRow(object):
 
 
 class FacilityRow(DataRow):
-    headers = {
-        'FacilityID': 0,
-        'VendorID': 1,
-    }
+    headers = [
+        'FacilityID',
+        'VendorID',
+    ]
 
     @property
     def hash(self):
@@ -50,11 +50,11 @@ class FacilityRow(DataRow):
 
 
 class GLRow(DataRow):
-    headers = {
-        'VendorID': 0,
-        'GLAccount': 1,
-        'Default': 2,
-    }
+    headers = [
+        'VendorID',
+        'GLAccount',
+        'Default',
+    ]
 
     @property
     def hash(self):
@@ -62,25 +62,24 @@ class GLRow(DataRow):
 
 
 class VendorRow(DataRow):
-    headers = {
-        'VendorID': 0,
-        'SupplierName': 1,
-        'TaxID': 2,
-        'AddressLine1': 3,
-        'AddressLine2': 4,
-        'City': 5,
-        'State': 6,
-        'Zip': 7,
-        'Phone': 8,
-        'PhoneExt': 9,
-        'Fax': 10,
-        'FaxExt': 11,
-        'ApprovedSupplier': 12,
-        'ActiveSupplier': 13,
-        'SupplierStatus': 14,
-        'PHIVendor': 15,
-
-    }
+    headers = [
+        'VendorID',
+        'SupplierName',
+        'TaxID',
+        'AddressLine1',
+        'AddressLine2',
+        'City',
+        'State',
+        'Zip',
+        'Phone',
+        'PhoneExt',
+        'Fax',
+        'FaxExt',
+        'ApprovedSupplier',
+        'ActiveSupplier',
+        'SupplierStatus',
+        'PHIVendor',
+    ]
 
     @property
     def hash(self):
@@ -88,17 +87,16 @@ class VendorRow(DataRow):
 
 
 class RemitToRow(DataRow):
-    headers = {
-        'VendorID': 0,
-        'RemitAddressLine1': 1,
-        'RemitAddressLine2': 2,
-        'RemitCity': 3,
-        'RemitState': 4,
-        'RemitZip': 5,
-        'Default': 6,
-        'AddressID': 7,
-
-    }
+    headers = [
+        'VendorID',
+        'RemitAddressLine1',
+        'RemitAddressLine2',
+        'RemitCity',
+        'RemitState',
+        'RemitZip',
+        'Default',
+        'AddressID',
+    ]
 
     @property
     def hash(self):
