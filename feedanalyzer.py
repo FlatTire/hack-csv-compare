@@ -124,6 +124,10 @@ class ColumnChange(DataChange):
         self.left = left
         self.right = right
 
+    @property
+    def hash(self):
+        return self.left.hash
+
     def __repr__(self):
         return "{field}: '{left}' -> '{right}'".format(
             field=self.field_name,
