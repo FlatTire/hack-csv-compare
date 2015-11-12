@@ -324,3 +324,70 @@ class FeedAnalyzer(object):
         changes += self._find_col_changes(data_left, data_right)
 
         return changes
+
+
+def output_additions(change_list, file_prefix):
+    file_path = file_prefix + "-adds.csv"
+    written_rows = 0
+    with open(file_path, 'w') as output_file:
+        writer = csv.writer(output_file)
+        output_headers = True
+        for change in change_list:
+            if not isinstance(change, Addition):
+                continue
+
+            if output_headers:
+                writer.writerow(change.headers)
+
+            writer.writerow(change.values)
+            written_rows += 1
+
+    logging.debug("Wrote {c} additions to '{file}'".format(
+        c=written_rows,
+        file=file_path
+    ))
+
+
+def output_deletions(change_list, file_prefix):
+    file_path = file_prefix + "-dels.csv"
+    written_rows = 0
+    with open(file_path, 'w') as output_file:
+        writer = csv.writer(output_file)
+        writer.writerow(['Key'])
+
+        for change in change_list:
+            if not isinstance(change, Deletion):
+                continue
+
+            writer.writerow(change.hash)
+            written_rows += 1
+
+    logging.debug("Wrote {c} deletions to '{file}'".format(
+        c=written_rows,
+        file=file_path
+    ))
+
+
+def output_column_changes(change_list, file_prefix):
+    file_path = file_prefix + "-updates.csv"
+    written_rows = 0
+    with open(file_path, 'w') as output_file:
+        writer = csv.writer(output_file)
+        writer.writerow(['Hash', 'Field', 'Left', 'Right'])
+
+        for change in change_list:
+            if not isinstance(change, ColumnChange):
+                continue
+
+            writer.writerow([
+                change.hash,
+                change.field_name,
+                change.left_field,
+                change.right_field
+            ])
+            written_rows += 1
+
+    logging.debug("Wrote {c} changes/updates to '{file}'".format(
+        c=written_rows,
+        file=file_path
+    ))
