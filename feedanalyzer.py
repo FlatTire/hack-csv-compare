@@ -23,7 +23,7 @@ class DataRow(object):
     def diff_columns(self, other):
         for idx, value in enumerate(self.values):
             if self.values[idx] != other.values[idx]:
-                yield idx, self.values[idx], other.values[idx]
+                yield idx
 
     def __eq__(self, other):
         return self.values == other.values
