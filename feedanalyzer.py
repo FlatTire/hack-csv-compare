@@ -241,7 +241,6 @@ class FeedAnalyzer(object):
 
         return datachanges
 
-
     @classmethod
     def _index_file(cls, file_path, row_class, delimiter, skip_rows):
         """Reads a structured file and returns the data in a nice data structure
