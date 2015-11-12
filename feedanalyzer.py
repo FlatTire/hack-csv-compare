@@ -105,17 +105,29 @@ class RemitToRow(DataRow):
 
 
 class DataChange(object):
-    pass
+    def __repr__(self):
+        return "{cls}: '{hash}'".format(
+            cls=self.__class__.__name__,
+            hash=self.hash
+        )
 
 
 class Addition(DataChange):
     def __init__(self, new_row):
         self.new_row = new_row
 
+    @property
+    def hash(self):
+        return self.new_row.hash
+
 
 class Deletion(DataChange):
     def __init__(self, old_row):
         self.old_row = old_row
+
+    @property
+    def hash(self):
+        return self.old_row.hash
 
 
 class ColumnChange(DataChange):
@@ -129,7 +141,8 @@ class ColumnChange(DataChange):
         return self.left.hash
 
     def __repr__(self):
-        return "{field}: '{left}' -> '{right}'".format(
+        return "'{hash}' [{field}]: '{left}' -> '{right}'".format(
+            hash=self.hash,
             field=self.field_name,
             left=getattr(self.left, self.field_name),
             right=getattr(self.right, self.field_name)
