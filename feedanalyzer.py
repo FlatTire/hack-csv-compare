@@ -40,8 +40,46 @@ class DataRow(object):
 
 class FacilityRow(DataRow):
     headers = {
-        'name': 0,
-        'addr1': 1,
+        'FacilityID': 0,
+        'VendorID': 1,
+    }
+
+    @property
+    def hash(self):
+        return (self.values[0] + self.values[1]).lower()
+
+
+class GLRow(DataRow):
+    headers = {
+        'VendorID': 0,
+        'GLAccount': 1,
+        'Default': 2,
+    }
+
+    @property
+    def hash(self):
+        return (self.values[0] + self.values[1] + self.values[2]).lower()
+
+
+class VendorRow(DataRow):
+    headers = {
+        'VendorID': 0,
+        'SupplierName': 1,
+        'TaxID': 2,
+        'AddressLine1': 3,
+        'AddressLine2': 4,
+        'City': 5,
+        'State': 6,
+        'Zip': 7,
+        'Phone': 8,
+        'PhoneExt': 9,
+        'Fax': 10,
+        'FaxExt': 11,
+        'ApprovedSupplier': 12,
+        'ActiveSupplier': 13,
+        'SupplierStatus': 14,
+        'PHIVendor': 15,
+
     }
 
     @property
@@ -49,16 +87,23 @@ class FacilityRow(DataRow):
         return self.values[0].lower()
 
 
-class GLRow(DataRow):
+class RemitToRow(DataRow):
+    headers = {
+        'VendorID': 0,
+        'RemitAddressLine1': 1,
+        'RemitAddressLine2': 2,
+        'RemitCity': 3,
+        'RemitState': 4,
+        'RemitZip': 5,
+        'Default': 6,
+        'AddressID': 7,
+
+    }
+
     @property
     def hash(self):
-        return (self.values[0] + self.values[1]).lower()
-
-
-class VendorRow(DataRow):
-    @property
-    def hash(self):
-        return self.values[0].lower()
+        return (self.values[0] + self.values[1] + self.values[2] + self.values[3] + self.values[4] + self.values[5] +
+                self.values[6] + self.values[7]).lower()
 
 
 class DataChange(object):
