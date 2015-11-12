@@ -5,6 +5,7 @@ Usage:
     analyze.py facility [options]
     analyze.py gl [options]
     analyze.py vendor [options]
+    analyze.py remit [options]
 
 Options:
     -l, --left FILE     First file
