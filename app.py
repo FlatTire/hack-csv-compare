@@ -22,6 +22,13 @@ def compare_files():
     left = request.files['left']
     right = request.files['right']
 
+    if not left:
+        raise Exception('No left file submitted')
+    elif not right:
+        raise Exception('No right file submitted')
+
+
+
     return """<pre>Trying...</pre>"""
 
 if __name__ == '__main__':
