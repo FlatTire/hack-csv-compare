@@ -2,3 +2,41 @@ body
 {
 
 }
+
+#formcont
+{
+}
+
+div.formrow
+{
+    padding: 4px 8px;
+    border-bottom: 1px dotted #CCC;
+}
+
+div.formrow:last-child
+{
+    border-bottom: none;
+}
+
+div.formrow div.c
+{
+    clear: both;
+}
+
+div.formlabel
+{
+    font-weight: bold;
+}
+
+div.formlabel, div.formvalue
+{
+    float: left;
+    width: 48%;
+}
+
+
+div.formvalue
+{
+    float: right;
+    text-align: right;
+}
