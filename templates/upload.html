@@ -7,10 +7,20 @@
     </head>
     <body>
         <h1>CSV Comparer</h1>
-        <div id="formcont"><form id="upform">
+        <div id="formcont"><form id="upform" method="post" enctype="multipart/form-data">
             <div class="formrow">
                 <div class="formlabel"><label>Left File</label></div>
-                <div class="formvalue">TODO</div>
+                <div class="formvalue"><input type="file" name="left" id="leftFile"></div>
+                <div class="c"></div>
+            </div>
+            <div class="formrow">
+                <div class="formlabel"><label>Right File</label></div>
+                <div class="formvalue"><input type="file" name="right" id="rightFile"></div>
+                <div class="c"></div>
+            </div>
+            <div class="formrow">
+                <div class="formvalue"><input type="submit" value="Compare Files">
+                <div class="c"></div>
             </div>
         </form></div>
     </body>
